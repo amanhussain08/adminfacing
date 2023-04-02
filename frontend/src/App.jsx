@@ -70,17 +70,7 @@ function App() {
 						</div>
 					</Tabs.TabPane>
 				</Tabs>
-				{/* <button onClick={fetchBookings} id="toggle">
-					{buttonText}
-				</button> */}
 			</div>
-			{/* <div>
-				{admin === false ? (
-					<UserForm />
-				) : (
-					<Admin Bookings={bookings} purple={lowkey} />
-				)}
-			</div> */}
 		</div>
 	);
 }

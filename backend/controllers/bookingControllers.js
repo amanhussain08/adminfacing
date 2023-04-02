@@ -85,7 +85,6 @@ const deleteBooking = async (req, res) => {
 
 const temp = async (req, res) => {
 	const { start, end, room, roomNumber } = req.body;
-	
 
 	const bookings = await Booking.find({
 		$and: [
