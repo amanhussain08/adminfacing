@@ -55,7 +55,6 @@ const createBooking = async (req, res) => {
 };
 
 const getBookings = async (req, res) => {
-	console.log("Hogyi Bhadwe");
 	const bookings = await Booking.find({});
 	res.json({ message: bookings });
 };
