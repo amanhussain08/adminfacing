@@ -1,0 +1,24 @@
+.booking {
+	border: 1px solid black;
+	background: lightblue;
+	padding: 2rem;
+	margin: 1rem;
+	border-radius: 0.5rem;
+}
+
+input {
+	width: fit-content;
+	padding: 5px 10px;
+}
+
+/* button{
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 0.2rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    background-color: black;
+    color: #f5f4f6;
+    font: 1.3rem Inconsolata,monospace;
+    text-shadow: 0 0 7px #f5f4f6
+} */
