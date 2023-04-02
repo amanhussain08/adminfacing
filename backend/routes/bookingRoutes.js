@@ -12,3 +12,5 @@ router.get("/getbookings", getBookings);
 router.post("/temp", temp);
 router.post("/updatebooking", updateBooking);
 router.post("/deletebooking", deleteBooking);
+
+module.exports = router;
