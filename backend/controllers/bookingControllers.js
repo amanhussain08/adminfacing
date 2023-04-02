@@ -37,8 +37,6 @@ const createBooking = async (req, res) => {
 		});
 	}
 
-	// let diff = end.getTime() - start.getTime();
-	// diff = diff / 1000 / 60 / 60;
 	const booking = await Booking.create({
 		id,
 		email,
@@ -87,12 +85,7 @@ const deleteBooking = async (req, res) => {
 
 const temp = async (req, res) => {
 	const { start, end, room, roomNumber } = req.body;
-	// const bookings = await Booking.find({
-	//     checkInDateNumber: {
-	//         $gt: new Date('1940-01-01'),
-	//         $lt: new Date('1960-01-01')
-	//     }
-	// });
+	
 
 	const bookings = await Booking.find({
 		$and: [
