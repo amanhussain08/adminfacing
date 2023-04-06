@@ -77,6 +77,18 @@ const updateBooking = async (req, res) => {
 	res.json({ error: 201, message: "Booking details updated successfully" });
 };
 
+const findSearch = async (req, res) => {
+	const { room, roomNumber } = req.body;
+	console.log(req.body);
+	console.log(room);
+	console.log(roomNumber);
+	const result = await Booking.find({
+		// roomNumber: roomNumber,
+		room: room,
+	});
+	res.json({ message: result });
+};
+
 const deleteBooking = async (req, res) => {
 	const { id } = req.body;
 	const booking = await Booking.deleteOne({ _id: id });
@@ -118,4 +130,5 @@ module.exports = {
 	updateBooking,
 	deleteBooking,
 	temp,
+	findSearch,
 };

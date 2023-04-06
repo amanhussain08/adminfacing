@@ -6,18 +6,20 @@ import { ToastContainer, toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 var url = "http://localhost:5000/";
 const UserForm = () => {
-	let [price, setPrice] = useState("See Estimate");
+	const [price, setPrice] = useState("See Estimate");
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
-	const [cost, setCost] = useState(0);
+	const [cost, setCost] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [email, setEmail] = useState("");
+	const [roomNo, setRoomNo] = useState("");
 
 	const success = (msg) => {
-		toast.success(msg, { duration: 2000 });
+		toast.success(msg, { duration: 1000 });
 	};
 
 	const err = (msg) => {
-		toast.error(msg, { duration: 2000 });
+		toast.error(msg, { duration: 1000 });
 	};
 
 	const handleSubmit = async (e) => {
@@ -40,7 +42,7 @@ const UserForm = () => {
 		setLoading(true);
 		try {
 			const { data } = await axios.post(`${url}api/v1/booking`, d);
-			if (data.error == 201) {
+			if (data.error === 201) {
 				success(data.message);
 			} else {
 				err(data.message);
@@ -51,17 +53,22 @@ const UserForm = () => {
 		setPrice("See Estimate");
 		setStartDate("");
 		setEndDate("");
-		setCost(0);
+		setCost("");
+		setEmail("");
+		setRoomNo("");
 		setLoading(false);
 	};
 
 	const getPrice = () => {
-		console.log("hello");
 		let d = new Date(startDate);
 		let e = new Date(endDate);
 		let diff = e.getTime() - d.getTime();
-		let hours = diff / (1000 * 3600);
-		setPrice(hours * cost);
+		if (diff < 0) setPrice("Enter Valid Time");
+		else {
+			let hours = diff / (1000 * 3600);
+			let estimatedPrice = Math.ceil(hours * cost);
+			setPrice(estimatedPrice);
+		}
 		return;
 	};
 	return (
@@ -74,6 +81,8 @@ const UserForm = () => {
 				<div className="col mb-3 mx-3 form-group">
 					<label htmlFor="email">Email:</label>
 					<input
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
 						className="form-control"
 						type="email"
 						name="email"
@@ -103,6 +112,8 @@ const UserForm = () => {
 							name="roomNumber"
 							id="roomNumber"
 							className="form-control"
+							value={roomNo}
+							onChange={(e) => setRoomNo(e.target.value)}
 							required
 						/>
 					</div>
@@ -113,6 +124,7 @@ const UserForm = () => {
 							type="text"
 							name="price"
 							id="price"
+							value={cost}
 							onChange={(e) => setCost(e.target.value)}
 							required
 						/>
@@ -126,6 +138,7 @@ const UserForm = () => {
 							type="datetime-local"
 							name="start"
 							id="start"
+							value={startDate}
 							onChange={(e) => setStartDate(e.target.value)}
 							required
 						/>
@@ -137,6 +150,7 @@ const UserForm = () => {
 							className="form-control"
 							name="end"
 							id="end"
+							value={endDate}
 							onChange={(e) => setEndDate(e.target.value)}
 							required
 						/>

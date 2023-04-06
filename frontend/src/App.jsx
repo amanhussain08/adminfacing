@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import React, { useState } from "react";
 import UserForm from "./components/UserForm";
 import Admin from "./components/Admin";
+import Search from "./components/Search";
 import axios from "axios";
 import { Tabs } from "antd";
 import SyncLoader from "react-spinners/SyncLoader";
@@ -11,13 +12,11 @@ var url = "http://localhost:5000/";
 function App() {
 	const [admin, setAdmin] = useState(false);
 	const [bookings, setBookings] = useState([]);
-	const [buttonText, setButtonTextx] = useState("Admin Page");
 	const [loading, setLoading] = useState(false);
 
 	const fetchBookings = async () => {
 		if (admin === true) {
 			setAdmin(false);
-			setButtonTextx("Admin Page");
 			return;
 		}
 		setLoading(true);
@@ -26,17 +25,12 @@ function App() {
 			console.log(data.message);
 			setBookings(data.message);
 			setAdmin(true);
-			setButtonTextx("Booking Page");
 		} catch (error) {
 			console.log(error);
 		}
 		setLoading(false);
 	};
 
-	const lowkey = (x) => {
-		setAdmin(false);
-		setButtonTextx(x);
-	};
 
 	return (
 		<div className="App">
@@ -66,8 +60,11 @@ function App() {
 							/>
 						</div>
 						<div id="adminSection">
-							<Admin Bookings={bookings} purple={lowkey} />
+							<Admin Bookings={bookings} />
 						</div>
+					</Tabs.TabPane>
+					<Tabs.TabPane tab="View" key="3">
+						<Search />
 					</Tabs.TabPane>
 				</Tabs>
 			</div>

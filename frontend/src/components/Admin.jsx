@@ -2,9 +2,6 @@ import React from "react";
 import Booking from "./Booking.jsx";
 import "./Admin.css";
 function Admin(props) {
-	const lowkey = (x) => {
-		props.purple(x);
-	};
 	return (
 		<div className="bookingContainer">
 			{props.Bookings.map((booking) => {
@@ -12,7 +9,6 @@ function Admin(props) {
 				return (
 					<Booking
 						booking={booking}
-						purple={lowkey}
 						key={booking._id}
 					/>
 				);

@@ -9,7 +9,7 @@ function Booking(props) {
 	const [room, setRoom] = useState(props.booking.room);
 	const [roomNumber, setRoomNumber] = useState(props.booking.roomNumber);
 	const [email, setEmail] = useState(props.booking.email);
-	const price = props.booking.price;
+	const [price, setPrice] = useState(props.booking.price);
 	const [checkInDate, setCheckInDate] = useState(props.booking.checkInDate);
 	const [checkOutDate, setCheckOutDate] = useState(
 		props.booking.checkOutDate
@@ -39,7 +39,7 @@ function Booking(props) {
 		try {
 			const { data } = await axios.post(`${url}api/v1/updatebooking`, d);
 
-			if (data.error == 201) {
+			if (data.error === 201) {
 				success(data.message);
 			} else {
 				err("Something went wrong");
@@ -57,9 +57,8 @@ function Booking(props) {
 		setLoading(true);
 		try {
 			const { data } = await axios.post(`${url}api/v1/deletebooking`, d);
-			if (data.error == 201) {
+			if (data.error === 201) {
 				success(data.message);
-				props.purple("Admin Page->");
 			} else {
 				err("Something went wrong");
 			}
@@ -119,7 +118,16 @@ function Booking(props) {
 						}}
 					/>{" "}
 				</div>
-				<div className="mt-2 mb-2">Price: {price} </div>
+				<div className="mt-2 mb-2">
+					Price:
+					<input
+						type="text"
+						value={price}
+						onChange={(e) => {
+							setPrice(e.target.value);
+						}}
+					/>{" "}
+				</div>
 				<div className="mt-2 mb-2">
 					Email:{" "}
 					<input
