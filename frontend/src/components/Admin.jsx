@@ -5,7 +5,7 @@ function Admin(props) {
 	return (
 		<div className="bookingContainer">
 			{props.Bookings.map((booking) => {
-				console.log(booking._id);
+				// console.log(booking._id);
 				return (
 					<Booking
 						booking={booking}

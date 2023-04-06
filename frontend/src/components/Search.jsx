@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import "./Admin.css";
 import "./UserForm.css";
 import Booking from "./Booking.jsx";
 var url = "http://localhost:5000/";
@@ -67,7 +68,7 @@ export default function Search() {
 				</div>
 			</form>
 
-			<div>
+			<div className="bookingContainer">
 				{searchData.length > 0 ? (
 					searchData.map((eachRoom) => {
 						return (
